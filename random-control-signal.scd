@@ -1,5 +1,5 @@
 s.boot;
-
+Server.default.options.numInputBusChannels=0; // Useful for when you have bluetooth headphones in.
 
 // This is a function. Functions are used for smaller examples.
 (
@@ -13,7 +13,8 @@ z = {
 }.play;
 )
 
-z.set(\noiseHz, exprand(5, 64));
+z.set(\noiseHz, exprand(50, 64)); // When I set this to exprand(0, 100), and then back to exprand(50, 64), it still sits at the same time. Weird!
+
 z.free;
 
 // Same thing as above but accomplished through a SynthDef.
@@ -29,6 +30,8 @@ SynthDef.new(\sineTest, {
 	Out.ar(0, sig);
 }).add;
 )
+
+
 
 x = Synth.new(\sineTest, [\noiseHz, 32]);
 x.set(\noiseHz, 12);

@@ -6,13 +6,15 @@ s.scope;
 
 (
 SynthDef.new(\pulseTest, {
-	arg ampHz=4, fund=40, maxPartial=4, width=0.5;
+	arg ampHz=4, fund=55, maxPartial=4, width=0.5;
 	var amp1, amp2, freq1, freq2, sig1, sig2;
 	// short pulses; multiplied by 0.75 just to take the volume down
 	// a bit.
-	amp1 = SinOsc.kr(4, 0.5, 0.12) * 0.75;
+	// amp1 = SinOsc.kr(4, 0.5, 0.12) * 0.75;
+	amp1 = SinOsc.kr(4, 0.5, 0.12);
 	// 0.5 phase so the two amps are out of phase relative to one another
-	amp2 = SinOsc.kr(4, 0, 0.12) * 0.75;
+	// amp2 = SinOsc.kr(4, 0, 0.12) * 0.75;
+	amp2 = SinOsc.kr(4, 0, 0.12);
 	// LFNoise0 will output random overtones of a given fundamental.
 	freq1 = LFNoise0.kr(ampHz).exprange(fund, fund*maxPartial).round(fund);
 	freq2 = LFNoise0.kr(ampHz).exprange(fund, fund*maxPartial).round(fund);
@@ -29,7 +31,8 @@ SynthDef.new(\pulseTest, {
 )
 
 x = Synth.new(\pulseTest);
-x.set(\width, 0.4);
+x.set(\width, 0.5);
+x.set(\maxPartial, 10);
 x = Synth.new(\pulseTest, [\ampHz, 3.3]);
 
 // Second experiment
